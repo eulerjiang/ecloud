@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Order List{% endblock %}
+{% block head %}Order List{% endblock %}
+
+
+{% block content %}
+<p>Active Oder</p>
+{% if order_list %}
+<table class='table table-striped'>
+	<thead>
+	<tr>
+		<th>Order Number</th>
+		<th>Template</th>
+		<th>UserName</th>
+		<th>Order Status</th>
+		<th>Start Time</th>
+		<th>Expired Time</th>
+	</tr>
+	</thead>
+{% for order in order_list %}
+	<tr>
+		<td>{{order.id}}</td>
+		<td>{{order.image.name}}</td>
+		<td>{{order.user.username}}</td>
+		<td>{{order.status}}</td>
+		<td>{{order.startTime|date:"Y-m-d H:i" }}</td>
+		<td>{{order.expiredTime|date:"Y-m-d H:i" }}</td>
+	</tr>
+{% endfor %}
+
+</table>
+
+{% else %}
+	<p>You don't have any order till now.</p>
+{% endif %}
+
+<p>Closed Oder</p>
+{% if closed_order_list %}
+<table class='table table-striped'>
+	<thead>
+	<tr>
+		<th>Order Number</th>
+		<th>Template</th>
+		<th>UserName</th>
+		<th>Order Status</th>
+		<th>Start Time</th>
+		<th>Expired Time</th>
+	</tr>
+	</thead>
+{% for order in closed_order_list %}
+	<tr>
+		<td>{{order.id}}</td>
+		<td>{{order.image.name}}</td>
+		<td>{{order.user.username}}</td>
+		<td>{{order.status}}</td>
+		<td>{{order.startTime|date:"Y-m-d H:i" }}</td>
+		<td>{{order.expiredTime|date:"Y-m-d H:i" }}</td>
+	</tr>
+{% endfor %}
+</table>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,107 @@
+#!/bin/bash
+
+action=$1
+action=`echo $action | awk -F"=" '{print $2}'`
+
+shift
+
+param=$*
+
+resourceDir="/tmp/os"
+
+createInstance()
+{
+    imageType=$1
+    username=$2
+    flavorType=$3
+    flavorType=6
+
+	echo "$action instance: $param"
+	sleep 10
+
+    echo "create instance"
+	instanceName="$imageType"-"$username"
+	uniqueID=`uuidgen`
+
+    randNum=`expr $RANDOM % 254`
+	publicIP="192.168.0.${randNum}"
+	privateIP="10.0.0.${randNum}"
+   
+    touch $resourceDir/$instanceName
+
+    echo "running" > $resourceDir/$instanceName
+
+	echo "InstanceName: $instanceName"
+	echo "InstanceUniqueID: $uniqueID"
+	echo "InstancePublicIP: $publicIP"
+	echo "InstancePrivateIP: $privateIP"
+}
+
+destoryInstance()
+{
+    echo "$action instance: $param"
+    imageType=$1
+    username=$2
+
+    instanceName="$imageType"-"$username"
+    echo "destroy VM $instanceName"    
+    rm $resourceDir/$instanceName
+}
+
+stopInstance()
+{
+    echo "$action instance: $param"
+    vm_uuid=$1
+
+	echo "$action instance: $param"
+
+    echo "stop VM $vm_uuid"    
+    echo "stop" > $resourceDir/$vm_uuid
+
+}
+
+restartInstance()
+{
+    echo "$action instance: $param"
+    vm_uuid=$1
+
+	echo "$action instance: $param"
+
+    echo "restart VM $vm_uuid"    
+    echo "rebooting" > $resourceDir/$vm_uuid
+}
+
+startInstance()
+{
+    echo "$action instance: $param"
+    vm_uuid=$1
+
+	echo "$action instance: $param"
+
+    echo "start VM $vm_uuid"    
+    echo "starting" > $resourceDir/$vm_uuid
+}
+
+statusCode=0
+case $action in 
+    "create")
+        createInstance $*
+        ;;
+    "destory")
+        destoryInstance $*
+        ;;
+    "stop")
+        stopInstance $*
+        ;;
+    "restart")
+        restartInstance $*
+        ;;
+    "start")
+        startInstance $*
+        ;;
+    *)
+        exit 1
+        ;;
+esac
+
+exit $statusCode

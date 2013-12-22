@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to Cloud Instance Order System{% endblock %}
+{% block head %}{% endblock %}
+
+{% block content %}
+  {% if user.username %}
+
+  {% if instance_list %}
+
+    <p> Your Current VMs: </p>
+    <form action="/instance/action/" method="POST" target="_blank">
+    {% csrf_token %}
+    <table class='table table-striped'>
+    	<thead>
+    	<tr>
+    		<th>Instance Name</th><th>IP Address</th><th>Size</th><th>Status</th><th>Action</th><th>Onwer</th><th>Expired Date</th><th>Order Number</th>
+    	</tr>
+    	</thead>
+
+      	{% for instance in instance_list %}
+        
+      	<tr>
+      		<td> {{ instance.instance }} </td>
+    		<td> {{ instance.internalIPAddress }} ;  {{ instance.externalIPAddress }}</td>
+    		<td> {{ instance.order.resource }} </td>
+    		<td> {{ instance.status }} </td>
+            <td>
+                <div class="btn-group">
+                  <button type="button" class="btn"><a href="/instance/{{ instance.uniqueID }}/console">VNC Console</a></button>
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu row_actions clearfix" role="menu">
+                    <li class="clearfix"><button  class="btn btn-small " name="action" value="instances__restart__{{ instance.uniqueID }}" type="submit">Restart</button></li>
+                    <li class="clearfix"><button  class="btn btn-small" name="action" value="instances__delete__{{ instance.uniqueID }}" type="submit">Destory</button></li>
+                    <li class="clearfix"><button  class="btn btn-small" name="action" value="instances__start__{{ instance.uniqueID }}" type="submit">Start</button></li>
+                    <li class="clearfix"><button  class="btn btn-small" name="action" value="instances__stop__{{ instance.uniqueID }}" type="submit">Shutdown</button></li>
+                  </ul>
+                </div>
+            </td>
+            <td> {{ instance.order.user.username }} </td>
+    		<td> {{ instance.order.expiredTime|date:"Y-m-d H:i" }} </td>
+    		<td class="sortable"> {{ instance.order.id }} </td>
+    	</tr>
+    	{% endfor %}    	
+    </table>
+    </form>
+  {% endif %}
+  
+  {% else %}
+    <p>Welcome anonymous user! 
+      You need to <a href="/login">login</a> 
+      before you can create your VM.</p>
+  {% endif %}
+
+{% endblock %}

@@ -1,0 +1,71 @@
+#!/bin/bash
+
+action=$1
+action=`echo $action | awk -F"=" '{print $2}'`
+
+shift
+
+param=$*
+
+createInstance()
+{
+	echo "$action instance: $param"
+
+	sleep 10
+
+
+	instanceName="instance1-template"
+	uniqueID="uiqueId1"
+	publicIP="192.1680.0.0"
+	privateIP="127.0.0.1"
+
+	echo "InstanceName: $instanceName"
+	echo "InstanceUniqueID: $uniqueID"
+	echo "InstancePublicIP: $publicIP"
+	echo "InstancePrivateIP: $privateIP"
+}
+
+destoryInstance()
+{
+    echo "$action instance: $param"
+
+}
+
+stopInstance()
+{
+	echo "$action instance: $param"
+}
+
+restartInstance()
+{
+	echo "$action instance: $param"
+}
+
+startInstance()
+{
+	echo "$action instance: $param"
+}
+
+statusCode=0
+case $action in 
+    "create")
+        createInstance
+        ;;
+    "destory")
+        destoryInstance
+        ;;
+    "stop")
+        stopInstance
+        ;;
+    "restart")
+        restartInstance
+        ;;
+    "start")
+        startInstance
+        ;;
+    *)
+        exit 1
+        ;;
+esac
+
+exit $statusCode

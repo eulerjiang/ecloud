@@ -1,0 +1,10 @@
+Hi {{ username }},
+
+Your order {{ }} will be expired:
+
+Order Number: {{ orderNumber }}
+Template: {{ image.name }}
+Start Time: {{ startTime }}
+Expired Time: {{ expiredTime }}
+
+ECloud Team

@@ -1,0 +1,12 @@
+Hi {{ username }},
+
+Your order is submitted to the system, below is the order information:
+
+Order Number: {{ orderNumber }}
+Template: {{ image.name }}
+Start Time: {{ startTime }}
+Expired Time: {{ expiredTime }}
+
+Please wait for the system to handling your order.
+
+ECloud Team

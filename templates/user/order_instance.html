@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Order Instance in Cloud{% endblock %}
+{% block head %}Order Instance in Cloud{% endblock %}
+
+{% block content %}
+
+    <script type="text/javascript"
+     src="{{ STATIC_URL }}js/bootstrap-datetimepicker.js">
+    </script>
+    <script type="text/javascript"
+     src="{{ STATIC_URL }}js/bootstrap-datetimepicker.js">
+    </script>
+
+    {{ form.media }}
+
+<form method="post" action=".">
+	{% csrf_token %}
+	
+	<table>
+	{{form.as_table}}
+	</table>
+  	<input type="submit" value="submit" />
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,29 @@
+Hi {{ username }},
+
+{% if status == "submit" %}
+Your order is submitted to the system, below is the order information:
+
+Order Number: {{ orderNumber }}
+Template: {{ image.name }}
+Start Time: {{ startTime }}
+Expired Time: {{ expiredTime }}
+
+Please wait for the system to handling your order.
+
+{% elif status == "success" %}
+Your order {{ order.id }} is successed to handle now. You can use VM with ssh.
+
+Order Number: {{ orderNumber }}
+Template: {{ image.name }}
+Start Time: {{ startTime }}
+Expired Time: {{ expiredTime }}
+
+{% elif status == "failed" %}
+Your order was failed to handle now. More detail, please see the log in the attached file.
+
+{% else %}
+
+{% endif %}
+
+
+ECloud Team
