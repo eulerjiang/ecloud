@@ -25,7 +25,7 @@ def main_page(request):
         user = User.objects.filter(username = username)
         orders = Order.objects.filter(user = user)
         expiredStatus = StatusType.objects.filter(type = 'expired')
-        instance_list = Instance.objects.filter(order=orders).select_related().exclude(status = expiredStatus)
+        instance_list = Instance.objects.filter(order=orders).select_related().exclude(status = expiredStatus).order_by("-id")
             
     variables = RequestContext(request, {
         'instance_list': instance_list
