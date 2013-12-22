@@ -126,7 +126,7 @@ class InstanceHanlder():
         
         infoFile = open(self.logfile, 'r')
         lines = infoFile.readlines()               
-        output.close()
+        infoFile.close()
         
         targetLines = lines[-4:]
         for line in targetLines:

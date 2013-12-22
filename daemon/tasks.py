@@ -47,7 +47,7 @@ def instanceDeleteNotify():
         orderExpiredNotify(order,timeDelta)
     return 0
 
-@periodic_task(run_every=crontab(hour="*", minute="*/5", day_of_week="*"))
+@periodic_task(run_every=crontab(hour="*", minute="*/2", day_of_week="*"))
 def cleanExpiredInstance():
     currentDatetime = datetime.datetime.today()
     
@@ -123,7 +123,7 @@ def sendInstanceAction(uuid, action):
         restartInstance(uuid)
     elif action == 'stop':
         stopInstance(uuid)
-    elif action == 'destory':
+    elif action == 'delete':
         deleteInstance(uuid)       
 
     return "Success to send action %s to instance %s" %(action, uuid)
@@ -189,8 +189,10 @@ def deleteInstance(uuid):
     instance = Instance.objects.get(uniqueID = uuid)
     order = instance.order
     
+    print("----------------------")
     order.expiredTime = datetime.datetime.today()
     order.save()
+    print(order)
   
     return "Success to delete instance"
 
