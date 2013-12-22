@@ -19,7 +19,11 @@
 	</tr>
 	</thead>
 {% for order in order_list %}
-	<tr>
+        {% if order.status == "success" %}
+	<tr class='success'>
+        {% else %}
+        <tr class='active'>
+        {% endif %}
 		<td>{{order.id}}</td>
 		<td>{{order.image.name}}</td>
 		<td>{{order.user.username}}</td>
@@ -49,7 +53,11 @@
 	</tr>
 	</thead>
 {% for order in closed_order_list %}
-	<tr>
+        {% if order.status == "failed" %}
+        <tr class='danger'>
+        {% else %}
+        <tr>
+        {% endif %}
 		<td>{{order.id}}</td>
 		<td>{{order.image.name}}</td>
 		<td>{{order.user.username}}</td>

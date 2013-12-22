@@ -19,22 +19,29 @@
     	</thead>
 
       	{% for instance in instance_list %}
-        
-      	<tr>
+        {% if instance.status.type == "running" %}
+        <tr class='success'>
+        {% elif instance.status.type == "shutdown" %}
+        <tr class='danger'>
+        {% elif instance.status.type == "rebooting" %}
+        <tr class='warning'>
+        {% else %}
+        <tr class='warning'>
+        {% endif %}  
       		<td> {{ instance.instance }} </td>
     		<td> {{ instance.internalIPAddress }} ;  {{ instance.externalIPAddress }}</td>
     		<td> {{ instance.order.resource }} </td>
     		<td> {{ instance.status }} </td>
             <td>
                 <div class="btn-group">
-                  <button type="button" class="btn"><a href="/instance/{{ instance.uniqueID }}/console">VNC Console</a></button>
+                  <button type="button" class="btn btn-default"><a href="/instance/{{ instance.uniqueID }}/console" target="_blank">VNC Console</a></button>
                   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
                   <ul class="dropdown-menu row_actions clearfix" role="menu">
                     <li class="clearfix"><button  class="btn btn-small " name="action" value="instances__restart__{{ instance.uniqueID }}" type="submit">Reboot</button></li>
-                    <li class="clearfix"><button  class="btn btn-small" name="action" value="instances__delete__{{ instance.uniqueID }}" type="submit">Destory</button></li>
+                    <li class="clearfix"><button  class="btn btn-small btn-danger" name="action" value="instances__delete__{{ instance.uniqueID }}" type="submit">Destory</button></li>
                     <li class="clearfix"><button  class="btn btn-small" name="action" value="instances__start__{{ instance.uniqueID }}" type="submit">Start</button></li>
                     <li class="clearfix"><button  class="btn btn-small" name="action" value="instances__stop__{{ instance.uniqueID }}" type="submit">Shutdown</button></li>
                   </ul>
