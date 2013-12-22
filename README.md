@@ -51,12 +51,14 @@ Start server under development without apache server mode:
 <pre><code>
 # python manage.py syncdb
 # python manage.py runserver 127.0.0.0:8000
-# python manage.py celery worker --loglevel=info -B -S djcelery.schedulers.DatabaseScheduler
+# celery -A ecloud worker --concurrency=4 -l debug -B -S djcelery.schedulers.DatabaseScheduler
 </code></pre>
 
-Fill database:
+Login URL/admin, and update tables:
 
-- StatusType: rebooting, running, expired, shutdown
-- Template: Template
-- Resource: 4CPU/8G RAM/50G Disk/9 Flavor
+- StatusType: running, rebooting, shutdown, shutdown
+- Project: demo
+- Resource: 4CPU/8G RAM/50G Disk/6 Flavor
+- Image: demo, os/handler, select project demo
+
 
