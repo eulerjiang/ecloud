@@ -147,7 +147,7 @@ BROKER_URL = 'amqp://guest:guest@localhost:5672/'
 
 #
 ## enable django-celery
-INSTALLED_APPS += ('djcelery', 'daemon')
+INSTALLED_APPS += ('daemon',)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
