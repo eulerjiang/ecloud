@@ -147,13 +147,16 @@ def order_update_page(request):
 
 @login_required
 def instance_vnc_console_page(request, instance_uuid):
-    instance = get_object_or_404(Instance, uniqueID = instance_uuid)
+    print(instance_uuid + ":OK")
+    instance = Instance.objects.get(uniqueID = instance_uuid)
     host = request.get_host().split(":")[0]
-    
+   
+    token = getConsoleToken(instance_uuid)
+ 
     variables = RequestContext(request, {
         'url': host, 
         'port': '6080',
-        'token': "kkdkdkdkkd-dkdkjhdj-dkdjdj",
+        'token': token,
         'uuid': instance_uuid
     })
     return render_to_response('instance/vnc_console.html', variables)

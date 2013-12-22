@@ -193,3 +193,15 @@ def deleteInstance(uuid):
     order.save()
   
     return "Success to delete instance"
+
+@task
+def getConsoleToken(uuid):
+    instance = Instance.objects.get(uniqueID = uuid)
+    order = instance.order
+    command = order.image.handler
+    
+    handler = InstanceHanlder()
+    token = handler.getVNCConole(uuid, command)
+    token = token.strip()
+
+    return token

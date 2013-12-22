@@ -34,6 +34,7 @@ class InstanceHanlder():
 
         output = open(self.logfile,'w')
         returnCode = subprocess.call(commandLine.split(), stdout= output )
+        output.close()
 
         print("finished command " + commandLine)
         
@@ -57,6 +58,7 @@ class InstanceHanlder():
 
         output = open(self.logfile,'w')
         returnCode = subprocess.call(commandLine.split(), stdout= output )
+        output.close()
 
         print("finished command " + commandLine)
        
@@ -124,18 +126,48 @@ class InstanceHanlder():
         
         infoFile = open(self.logfile, 'r')
         lines = infoFile.readlines()               
-        infoFile.close()
+        output.close()
         
         targetLines = lines[-4:]
         for line in targetLines:
             if line.startswith("InstanceName:"):
-                self.instanceName = line.replace("InstanceName: ", "")
+                self.instanceName = line.replace("InstanceName: ", "").strip()
             elif line.startswith("InstanceUniqueID:"):
-                self.uniqueID = line.replace("InstanceUniqueID: ", "")
+                self.uniqueID = line.replace("InstanceUniqueID: ", "").strip()
             elif line.startswith("InstancePublicIP:"):
-                self.publicIP = line.replace("InstancePublicIP: ", "")
+                self.publicIP = line.replace("InstancePublicIP: ", "").strip()
             elif line.startswith("InstancePrivateIP:"):
-                self.privateIP = line.replace("InstancePrivateIP: ", "")
+                self.privateIP = line.replace("InstancePrivateIP: ", "").strip()
+
+    def getVNCConole(self, uuid, executeCommand="executeCommand"):
+        self.logfile = "/tmp/console_" + uuid
+        if os.path.isabs(executeCommand) == False:
+            executeCommand = settings.ecloud_script_dir + "/" + executeCommand
+        self.executeCommand = executeCommand
+
+        if not os.path.exists(self.executeCommand):
+            print("Error: no such command: " + self.executeCommand + ", please check the configuration of this template!")
+            return 1
+
+        commandLine = self.executeCommand + " --action=getconsole " + uuid
+        print("execute command:" + commandLine)
+
+        output = open(self.logfile,'w')
+        returnCode = subprocess.call(commandLine.split(), stdout= output )
+        output.close()
+        print("finished command " + commandLine)
+        
+        output = open(self.logfile,'r')
+        lines = output.readlines()
+        output.close()
+
+        token='not_get_yet'
+        for line in lines:
+            if line.find('token') != -1:
+                token=line.split('=')[1].strip()
+                break
+
+        return token
             
     def getInstanceUniqueID(self):
         return self.uniqueID
