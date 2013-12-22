@@ -49,6 +49,7 @@ The ECloud requires below softwares:
 
 Start server under development without apache server mode:
 <pre><code>
+# python manage.py syncdb
 # python manage.py runserver 127.0.0.0:8000
 # python manage.py celery worker --loglevel=info -B -S djcelery.schedulers.DatabaseScheduler
 </code></pre>
