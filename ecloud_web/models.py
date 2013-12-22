@@ -21,8 +21,8 @@ class Project(models.Model):
     memory_quota = models.IntegerField(blank=True)
     memory_used = models.IntegerField(blank=True)
 
-    #def __str__(self):
-    #    return 'Project %s, %sGB RAM, %sGB Disk' % (self.name, self.instance_max, self.instance_quota)
+    def __str__(self):
+        return 'Project %s' % (self.name)
 
 class CloudInfo(models.Model):
     project = models.ForeignKey(Project)
