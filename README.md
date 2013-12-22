@@ -1,42 +1,61 @@
-Install
-======
+## Install ##
 
-* Install Python 2.6 or hingher version
-* Install Django 1.5 version
-* Install Django-Celery
-* Install rabbitmq-server
-* Install Apache
+The ECloud requires below softwares:
 
-Install RabbitMQ-Server:
+* Python 2.6 or hingher version
+* Django 1.6 version
+* Celery
+* Rabbitmq-server
+* Apache web
 
-* Install erlang:
+### Install Django 1.6 ###
 
-> zypper addrepo http://download.opensuse.org/repositories/server:/database/SLE_11_SP1 database
-> zypper addrepo http://download.opensuse.org/repositories/devel:/languages:/erlang/SLE_11_SP1 erlang
-> zypper install erlang
+<pre><code>
+# wget https://www.djangoproject.com/download/1.6.1/tarball/
+# tar xzvf Django-1.6.1.tar.gz
+# cd Django-1.6.1
+# python setup.py install
+</code></pre>
 
-* Install RabbitMQ-Server
+### Install Celery ###
 
-> zypper addrepo http://download.opensuse.org/repositories/devel:/languages:/python/SLE_11_SP1 python
-> zypper install rabbitmq-server
+ Download from https://pypi.python.org/pypi/celery/
+<pre><code>
+# wget --no-check-certificate https://pypi.python.org/packages/source/c/celery/celery-3.1.7.tar.gz
+# tar zxvf celery-3.1.7.tar.gz
+# cd celery-3.1.7
+# python setup.py install
+</code></pre>
 
-Install Apache
+### Install erlang ###
+<pre><code>
+# zypper addrepo http://download.opensuse.org/repositories/server:/database/SLE_11_SP1 database
+# zypper addrepo http://download.opensuse.org/repositories/devel:/languages:/erlang/SLE_11_SP1 erlang
+# zypper install erlang
+</code></pre>
 
-> zypper install apache2
+### Install RabbitMQ-Server ###
+<pre><code>
+# zypper addrepo http://download.opensuse.org/repositories/devel:/languages:/python/SLE_11_SP1 python
+# zypper install rabbitmq-server
+</code></pre>
 
-How to use run it 
-======
+### Install Apache ###
+<pre><code>
+# zypper install apache2
+</code></pre>
 
-* python manage.py runserver
-* python manage.py celery worker --loglevel=info -B -S djcelery.schedulers.DatabaseScheduler
+## How to use run it ##
 
-* Fill database:
-StatusType: active, running, expired, shutdown
-Template: Template
-Resource: 4CPU/8G RAM/50G Disk/9 Flavor
+Start server under development without apache server mode:
+<pre><code>
+# python manage.py runserver 127.0.0.0:8000
+# python manage.py celery worker --loglevel=info -B -S djcelery.schedulers.DatabaseScheduler
+</code></pre>
 
-Init Database
-======
+Fill database:
 
-* login /admin
-* fill image, statustype tables
+- StatusType: rebooting, running, expired, shutdown
+- Template: Template
+- Resource: 4CPU/8G RAM/50G Disk/9 Flavor
+
