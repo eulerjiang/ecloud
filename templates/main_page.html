@@ -31,7 +31,7 @@
       		<td> {{ instance.instance }} </td>
     		<td> {{ instance.internalIPAddress }} ;  {{ instance.externalIPAddress }}</td>
     		<td> {{ instance.order.resource }} </td>
-    		<td> {{ instance.status }} </td>
+    		<td> <strong>{{ instance.status }}</strong> </td>
             <td>
                 <div class="btn-group">
                   <button type="button" class="btn btn-default"><a href="/instance/{{ instance.uniqueID }}/console" target="_blank">VNC Console</a></button>
