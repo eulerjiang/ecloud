@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block title %}Order List{% endblock %}
-{% block head %}Order List{% endblock %}
+{% block head %}{% endblock %}
 
 
 {% block content %}
-<p>Active Oder</p>
+<h3>Active Oder</h3>
 {% if order_list %}
 <table class='table table-striped'>
 	<thead>
@@ -36,10 +36,10 @@
 </table>
 
 {% else %}
-	<p>You don't have any order till now.</p>
+	<h5>You don't have any order till now.</h5>
 {% endif %}
 
-<p>Closed Oder</p>
+<h3>Closed Oder</h3>
 {% if closed_order_list %}
 <table class='table table-striped'>
 	<thead>

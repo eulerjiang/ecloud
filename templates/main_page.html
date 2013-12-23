@@ -8,10 +8,10 @@
 
   {% if instance_list %}
 
-    <p> Your Current VMs: </p>
+    <h3> Your Current VMs: </h3>
     <form action="/instance/action/" method="POST" target="_blank">
     {% csrf_token %}
-    <table class='table table-striped'>
+    <table class='table table-bordered'>
     	<thead>
     	<tr>
     		<th>Instance Name</th><th>IP Address</th><th>Size</th><th>Status</th><th>Action</th><th>Onwer</th><th>Expired Date</th><th>Order Number</th>
@@ -48,8 +48,8 @@
                 </div>
             </td>
             <td> {{ instance.order.user.username }} </td>
-    		<td> {{ instance.order.expiredTime|date:"Y-m-d H:i" }} </td>
-    		<td class="sortable"> {{ instance.order.id }} </td>
+    	    <td> {{ instance.order.expiredTime|date:"Y-m-d H:i" }} <button class="btn btn-small"><a href="/order/{{ instance.order.id }}/change/">change</a></button> </td>
+    	    <td class="sortable"> {{ instance.order.id }} </td>
     	</tr>
     	{% endfor %}    	
     </table>
