@@ -48,8 +48,8 @@
                 </div>
             </td>
             <td> {{ instance.order.user.username }} </td>
-    	    <td> {{ instance.order.expiredTime|date:"Y-m-d H:i" }} <button class="btn btn-small"><a href="/order/{{ instance.order.id }}/change/">change</a></button> </td>
-    	    <td class="sortable"> {{ instance.order.id }} </td>
+    	    <td> {{ instance.order.expiredTime|date:"Y-m-d H:i" }} </td>
+    	    <td class="sortable"> {{ instance.order.id }} <button class="btn btn-small"><a href="/order/{{ instance.order.id }}/update/">Update order</a></button> </td>
     	</tr>
     	{% endfor %}    	
     </table>

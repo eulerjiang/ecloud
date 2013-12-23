@@ -142,8 +142,19 @@ def order_list_page(request):
 
 
 @login_required
-def order_update_page(request):
-    return ""
+def order_update_page(request, orderid):
+    order = Order.objects.get(id = orderid)
+    if request.method == 'POST':
+        #action = request.REQUEST['action']
+        expiredTime = request.REQUEST['expiredTime'] 
+        
+        order.expiredTime = expiredTime
+        order.save()
+
+    variables = RequestContext(request, {
+        'order': order,
+     })
+    return render_to_response('order/update_order.html', variables)
 
 @login_required
 def instance_vnc_console_page(request, instance_uuid):

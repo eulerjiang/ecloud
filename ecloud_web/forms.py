@@ -68,3 +68,5 @@ class OrderForm(forms.Form):
         self.fields['templateName'] = forms.CharField( label='Template', widget = forms.Select(choices=imageChoices) )
         self.fields['resourceType'] = forms.CharField( label='Resource', widget = forms.Select(choices=resourceChoices) )
         self.fields['project'] = forms.CharField( label='Project', widget = forms.Select(choices=projectChoices) )
+
+

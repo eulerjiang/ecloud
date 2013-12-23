@@ -38,7 +38,7 @@ urlpatterns = patterns('',
     # order
     url(r'^user/view_order/$', view_order_page),
     url(r'^user/order_instance/$', order_instance_page),
-    url(r'^order/update/$', order_update_page),
+    url(r'^order/(.*)/update/$', order_update_page),
     url(r'^order/list/$', order_list_page),
 
     # Instance

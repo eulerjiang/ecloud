@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Update Order{% endblock %}
+{% block head %}{% endblock %}
+
+  <h3>Change Order</h3>
+
+{% block content %}
+  <h3>Current Order Information:</h3>
+    <script type="text/javascript"
+     src="{{ STATIC_URL }}js/bootstrap-datetimepicker.js">
+    </script>
+    <script type="text/javascript"
+     src="{{ STATIC_URL }}js/bootstrap-datetimepicker.js">
+    </script>
+
+   <table class="table table-bordered">
+   <tr>
+      <td>Onwer: </td>
+      <td>{{ order.user.username }}</td>
+   </tr>
+   <tr>
+      <td>Order Number: </td>
+      <td>{{ order.id }}</td>
+   </tr>
+   <tr>
+      <td>Start Time: </td>
+      <td>{{ order.startTime |date:"Y-m-d H:i" }} </td>
+   <tr>
+      <td>Expired Time: </td> <td> {{ order.expiredTime |date:"Y-m-d H:i"  }} </td>
+   </tr>
+   <tr>
+      <td>Template: </td>
+      <td>{{ order.image.name }}</td>
+   </tr>
+   <tr>
+      <td>Resource: </td>
+      <td>{{ order.resource }}</td>
+   </tr>
+   </table>
+
+<form method="post" action=".">
+    {% csrf_token %}
+
+    <label> New Expired Time: <input name="expiredTime" value="{{ order.expiredTime |date:"Y-m-d H:i" }}"></input></label>
+    
+    <label><button type="submit" class="btn btn-primary">Update</button></label>
+
+</form>
+
+{% endblock %}
