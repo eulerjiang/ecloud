@@ -7,7 +7,7 @@ from django.core.mail import EmailMessage
 def orderExpiredNotify(order, expiredTimeString):
     subject = "%s Your order %s will be expired in %s later" %("[ECloud]", order.id, expiredTimeString)
     
-    status == "notify"
+    status = "notify"
     emailTemplateFile="email/order_email.txt"
     if status == "notify":
         emailTemplateFile="email/order_notify_email.txt"

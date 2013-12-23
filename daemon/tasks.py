@@ -54,7 +54,11 @@ def cleanExpiredInstance():
     expiredOrderList = Order.objects.exclude(status ='closed').filter(Q(expiredTime__lte = currentDatetime))
     print("Start Clean Expired Instance")
     for oneOrder in expiredOrderList:
-        instance = Instance.objects.get(order = oneOrder)
+        try:
+            instance = Instance.objects.get(order = oneOrder)
+        except Instance.DoesNotExist:
+            instance = None
+            continue
 
         handler = InstanceHanlder()
         handler.destroyInstance(instance.uniqueID, oneOrder.image.handler)

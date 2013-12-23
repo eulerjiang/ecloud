@@ -120,7 +120,7 @@ def view_order_page(request):
         'order_list': order_list,
         'closed_order_list': closed_order_list
     })
-    return render_to_response('user/view_order.html', variables)
+    return render_to_response('order/list_order.html', variables)
 
 @login_required
 def order_list_page(request):

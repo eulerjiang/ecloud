@@ -1,6 +1,6 @@
 Hi {{ username }},
 
-Your order {{ }} will be expired:
+Your order {{ orderNumber }} will be expired:
 
 Order Number: {{ orderNumber }}
 Template: {{ image.name }}
