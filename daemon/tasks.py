@@ -26,7 +26,7 @@ def instanceDeleteNotify():
     timedelta2=datetime.timedelta(hours=4)
     timedelta3=datetime.timedelta(minutes=30)
 
-    activeOrderList = Order.objects.filter(status ='Finished')
+    activeOrderList = Order.objects.filter(status ='success')
     print("current time: %s", currentDatetime)
     for order in activeOrderList:
         myExpiredDatetime =  order.expiredTime
