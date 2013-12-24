@@ -34,22 +34,24 @@
     		<td> <strong>{{ instance.status }}</strong> </td>
             <td>
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default"><a href="/instance/{{ instance.uniqueID }}/console" target="_blank">VNC Console</a></button>
+                  <button type="button" class="btn btn-default btn-xs"><a href="/instance/{{ instance.uniqueID }}/console" target="_blank">VNC Console</a></button>
                   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
+                    <span class="caret" ></span>
+
                   </button>
-                  <ul class="dropdown-menu row_actions clearfix" role="menu">
-                    <li class="clearfix"><button  class="btn btn-small " name="action" value="instances__restart__{{ instance.uniqueID }}" type="submit">Reboot</button></li>
-                    <li class="clearfix"><button  class="btn btn-small btn-danger" name="action" value="instances__delete__{{ instance.uniqueID }}" type="submit">Destory</button></li>
-                    <li class="clearfix"><button  class="btn btn-small" name="action" value="instances__start__{{ instance.uniqueID }}" type="submit">Start</button></li>
-                    <li class="clearfix"><button  class="btn btn-small" name="action" value="instances__stop__{{ instance.uniqueID }}" type="submit">Shutdown</button></li>
+                  <ul class="dropdown-menu clearfix" role="menu">
+                    <li class="clearfix"><button  class="btn btn-xs" name="action" value="instances__restart__{{ instance.uniqueID }}" type="submit">Reboot</button></li>
+                    <li class="clearfix"><button  class="btn btn-xs" name="action" value="instances__start__{{ instance.uniqueID }}" type="submit">Start</button></li>
+                    <li class="clearfix"><button  class="btn btn-xs" name="action" value="instances__stop__{{ instance.uniqueID }}" type="submit">Shutdown</button></li>
+                    <li class="clearfix"><button  class="btn btn-xs btn-danger" name="action" value="instances__delete__{{ instance.uniqueID }}" type="submit">Destory</button></li>
+                    <li class="divider"></li>
+                    <li class="clearfix"><a href="/order/{{ instance.order.id }}/update/">Update Order</a></li>
                   </ul>
                 </div>
             </td>
             <td> {{ instance.order.user.username }} </td>
     	    <td>  {{ instance.order.expiredTime|date:"Y-m-d H:i" }} </td>
-    	    <td class="sortable"> {{ instance.order.id }} <button class="btn btn-small"><a href="/order/{{ instance.order.id }}/update/">Update order</a></button> </td>
+    	    <td class="sortable"> {{ instance.order.id }} </td>
     	</tr>
     	{% endfor %}    	
     </table>
