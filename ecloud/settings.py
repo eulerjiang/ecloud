@@ -131,7 +131,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'ecloud_web'
+    'ecloud_web',
+    'bootstrap3',
 )
 
 #import djcelery

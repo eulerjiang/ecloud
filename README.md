@@ -45,6 +45,14 @@ The ECloud requires below softwares:
 # zypper install apache2
 </code></pre>
 
+### Install Django-bootstrap3 ###
+<pre><code>
+# git clone https://github.com/dyve/django-bootstrap3.git
+# cd django-bootstrap3
+# python setup.py build
+# python setup.py install
+</code></pre>
+
 ## How to use run it ##
 
 Start server under development without apache server mode:

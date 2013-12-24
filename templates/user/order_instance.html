@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Order Instance in Cloud{% endblock %}
-{% block head %}Order Instance in Cloud{% endblock %}
+{% load bootstrap3 %}
+
+{% block title %}Order VM{% endblock %}
+{% block head %}{% endblock %}
 
 {% block content %}
 
+    <h3>Order VM</h3>
+    <hr>
     <script type="text/javascript"
      src="{{ STATIC_URL }}js/bootstrap-datetimepicker.js">
     </script>
@@ -14,14 +18,14 @@
 
     {{ form.media }}
 
-<form method="post" action=".">
+<form  role="form" class="form-horizontal" method="post" action=".">
     {% csrf_token %}
 	
-    <table clas="table-striped">
-        {{form.as_table}}
-    </table>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    {% bootstrap_form form layout="horizontal" %}
+
+    {% buttons submit='Submit' reset='Cancel' layout='horizontal' %}{% endbuttons %}
 </form>
 
+    <hr>
 
 {% endblock %}
